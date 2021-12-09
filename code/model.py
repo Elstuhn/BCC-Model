@@ -19,3 +19,4 @@ def makemodel():
   model.add(Dropout(0.5))
   model.add(Dense(4, activation = 'softmax'))
   model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+  return model
