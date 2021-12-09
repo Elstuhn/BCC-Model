@@ -18,3 +18,20 @@ def check_acc(model, X_test, y_test):
     plt.bar(["correct", "incorrect"], [correct, incorrect])
     plt.show()
     print(f"Accuracy: {(correct/(correct+incorrect))*100}%")
+
+    
+def plothist(history, metric):
+    plt.figure()
+    if metric == "accuracy":
+        plt.plot(history.history['accuracy'])
+        plt.plot(history.history['val_accuracy'])
+        plt.title('Model Accuracy')
+        plt.ylabel("Accuracy")
+    elif metric == "loss":
+        plt.plot(history.history['loss'])
+        plt.plot(history.history['val_loss'])
+        plt.title("Model Loss")
+        plt.ylabel("Loss")
+    plt.xlabel("Epoch")
+    plt.legend(["Train", "Test"])
+    plt.show()
