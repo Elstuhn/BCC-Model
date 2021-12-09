@@ -1,3 +1,7 @@
+from PIL import Image
+import os
+import numpy as np
+
 classes = ["Eosinophil", "Lymphocite", "Monocyte", "Neutrophil"]
 labels = [0 for i in range(2497)] + [1 for i in range(2483)] + [2 for i in range(2478)] + [3 for i in range(2499)]
 labelsY = [0 for i in range(623)] + [1 for i in range(620)] + [2 for i in range(620)] + [3 for i in range(624)]
