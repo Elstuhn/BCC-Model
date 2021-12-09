@@ -8,9 +8,9 @@ from keras.wrappers.scikit_learn import KerasClassifier
 from tensorflow.keras.applications.resnet50 import ResNet50
 from sklearn.model_selection import RandomizedSearchCV
 from keras.callbacks import ModelCheckpoint, EarlyStopping
-import matplotlib.pyplot as plt
 from PIL import Image
 import os
+from visualize import *
 
 earlystop = EarlyStopping(monitor = "val_accuracy", patience = 3)
 model_save = ModelCheckpoint('BloodCells.hdf5',
@@ -60,42 +60,8 @@ history = model.fit(trainX, labels, epochs=1000, validation_data = (testX, label
 score = model.evaluate(testX, labelsY, verbose = 0)
 print("Test loss:", score[0])
 print("Test accuracy:", score[1])
-
-def check_acc(model, X_test, y_test):
-    incorrect = 0
-    correct = 0
-    for i in range(len(X_test)):
-        prediction = model.predict(X_test[i].reshape(1, 120, 160, 1)).argmax()
-        actual = y_test[i]
-        if int(prediction) != int(actual):
-            incorrect += 1
-        else:
-            correct += 1
-            
-    fig = plt.figure()
-    plt.ylabel("Amount")
-    plt.xlabel(f"Accuracy: {(correct/(correct+incorrect))*100}%")
-    plt.bar(["correct", "incorrect"], [correct, incorrect])
-    plt.show()
-    print(f"Accuracy: {(correct/(correct+incorrect))*100}%")
     
-#check_acc(model, testX, labelsY)
-
-def plothist(history, metric):
-    plt.figure()
-    if metric == "accuracy":
-        plt.plot(history.history['accuracy'])
-        plt.plot(history.history['val_accuracy'])
-        plt.title('Model Accuracy')
-        plt.ylabel("Accuracy")
-    elif metric == "loss":
-        plt.plot(history.history['loss'])
-        plt.plot(history.history['val_loss'])
-        plt.title("Model Loss")
-        plt.ylabel("Loss")
-    plt.xlabel("Epoch")
-    plt.legend(["Train", "Test"])
-    plt.show()
+check_acc(model, testX, labelsY)
     
 plothist(history, "accuracy")
 plothist(history, "loss")
