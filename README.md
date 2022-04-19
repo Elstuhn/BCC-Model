@@ -1,5 +1,5 @@
 # BCC-Model
-A convolutional neural network for classifying 4 different type of blood cells
+A basic convolutional neural network for classifying 4 different type of blood cells
 
 
 The dataset is too large to be stored here
